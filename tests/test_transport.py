@@ -27,6 +27,7 @@ def test_transport_3():
     assert (transport(loc, vel, dt) == np.array([[1.5, 2.5], [10.5, 11.5]])).all()
 
 # and now let's try with lists
+@pytest.mark.xfail
 def test_transport_4():
     loc = [[1, 2], [11, 12]]
     vel = [[1, 1], [-1, -1]]
