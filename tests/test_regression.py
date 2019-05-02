@@ -1,19 +1,25 @@
 import pycontest
-from pycontest import simulation as sim2d
+from pycontest import simulation as sim
 import numpy as np                                                             
 import pytest
 import os
 
-@pytest.mark.skip(reason="TODO")
 def test_regression():
 
     # initial condition and simulation params
+    domain = ([-2, 12], [0, 3])
+    t_max = 10
+    dt = 0.5
+    loc_0 = np.array([[0, 1.5],[10, 1.5]])
+    vel_0 = np.array([[1, 0], [-1, 0]])
+    radius = 1
+    mass = [1, 1]
 
-    # run simulation
-    loc, vel = sim2d.simulation(...)
+    # running the simulation
+    loc, vel = sim.simulation(t_max, dt, mass, radius, loc_0, vel_0, domain)
 
     # save reference simulations (only once when the test is created)
-    np.save(os.path.join(os.path.dirname(__file__),"../data/locations_ref.npy"), loc)
+    # np.save(os.path.join(os.path.dirname(__file__),"../data/locations_ref.npy"), loc)
 
     # read in reference values (every time the test is run)
     loc_ref = np.load(os.path.join(os.path.dirname(__file__), "../data/locations_ref.npy"))

@@ -6,7 +6,7 @@ import pytest
 
 
 @pytest.fixture(scope="module")
-def data(request):
+def data():
 
     print("\n create data")
     # initial condition and simulation parameters
@@ -27,12 +27,9 @@ def data(request):
     my_data["vel"] = vel
     my_data["mass"] = mass
 
-    def data_cleanup():
-        print("\n removing data")
-        my_data.clear()
-
-    request.addfinalizer(data_cleanup)
-    return my_data
+    yield my_data
+    print("\n removing data")
+    my_data.clear()
 
 
 def test_energy(data):
